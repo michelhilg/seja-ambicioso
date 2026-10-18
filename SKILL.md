@@ -1,105 +1,106 @@
 ---
-name: be-ambitious
-description: Makes a task or prompt more ambitious using Felix Rieseberg's types of ambition, Altitude (aim at the outcome, the goal beyond the goal), Depth (work like the best expert in the field, from the raw data, checked by an outside judge) and Range (bring in other fields and do what their experts do). Writes the ambitious plan and a rewritten prompt, then does the work when it was handed a task. Use when the user types /be-ambitious, says "be more ambitious", "aim higher", "go deeper on this", "what's the goal beyond the goal", "what would a top expert do here", "raise the bar", or asks to make a prompt more ambitious.
+name: seja-ambicioso
+description: Deixa uma tarefa ou um prompt mais ambicioso usando os tipos de ambição de Felix Rieseberg, Altitude (mirar no resultado, o objetivo por trás do objetivo), Profundidade (trabalhar como o melhor especialista da área, a partir dos dados brutos, validado por um juiz externo) e Alcance (trazer outras áreas e fazer o que os especialistas delas fazem). Escreve o plano ambicioso e um prompt reescrito, e depois executa o trabalho quando recebeu uma tarefa. Use quando o usuário digitar /seja-ambicioso, disser "seja mais ambicioso", "mira mais alto", "vai mais fundo nisso", "qual é o objetivo por trás do objetivo", "o que um especialista de ponta faria aqui", "sobe a régua", ou pedir para deixar um prompt mais ambicioso.
 license: MIT
 metadata:
-  author: RoboNuggets
+  author: Michel Hilg (@michelhilg)
+  original: be-ambitious, de Jay E | RoboNuggets (https://github.com/robonuggets/be-ambitious)
   source: https://felixrieseberg.com/how-to-be-more-ambitious-a-tutorial-for-humans-with-models/
 ---
 
-# Be ambitious
+# Seja ambicioso
 
-Every idea here comes from Felix Rieseberg's article [How to be more ambitious: a tutorial for humans with models](https://felixrieseberg.com/how-to-be-more-ambitious-a-tutorial-for-humans-with-models/) (13 Oct 2026). Felix works on Claude at Anthropic. This skill turns his article into steps an agent can follow.
+Todas as ideias aqui vêm do artigo de Felix Rieseberg [How to be more ambitious: a tutorial for humans with models](https://felixrieseberg.com/how-to-be-more-ambitious-a-tutorial-for-humans-with-models/) ("Como ser mais ambicioso: um tutorial para humanos com modelos", 13 out. 2026). Felix trabalha no Claude, na Anthropic. Esta skill transforma o artigo dele em passos que um agente consegue seguir. As citações abaixo são traduções livres do original em inglês.
 
-Most people use a model at the size of the task they typed. Model skills grow unevenly, "astounding in some directions, while inadequate in others" (Terence Tao), so the only way to find the astounding parts is to aim higher than feels reasonable.
+A maioria das pessoas usa um modelo no tamanho da tarefa que digitou. As habilidades dos modelos crescem de forma desigual, "impressionantes em algumas direções, insuficientes em outras" (Terence Tao), então o único jeito de achar as partes impressionantes é mirar mais alto do que parece razoável.
 
-## The rules that matter most
+## As regras que mais importam
 
-1. **Better, not bigger.** Each type raises something: the outcome (Altitude), the standard (Depth) or the set of perspectives (Range). None of them means more deliverables, features or side quests. If a suggestion makes the job larger without making it better, drop it.
-2. **Do what the expert does, not how they talk.** When you bring in a field, use its methods and instruments. Switching vocabulary without switching methods is role play: the transcript gets weirder and the result stays the same.
-3. **An outside judge decides if it worked.** Never grade your own work. Find something other than you or the user that shows the result is right: a test, a benchmark, a reproduction, held-out data, a measurement. Best of all is a tool you can run to get feedback at once.
-4. **Treat the hard target as reasonable.** If a goal looks impossible, assume it's solvable and keep going. Specific hard goals beat "do your best" (Locke and Latham's review of 35 years of goal-setting research, which Felix cites). Report honestly against the judge: a missed hard target with real numbers is a good result. A faked one is not.
-5. **Get the access, don't fake it.** All of this needs a computer you can install software on and access to the real data, through MCP connectors (plug-ins that link an agent to other apps) or other means. If either is missing, name exactly what's missing and what it would unlock. Never invent a source, tool or result to fill the gap.
+1. **Melhor, não maior.** Cada tipo eleva alguma coisa: o resultado (Altitude), o padrão de qualidade (Profundidade) ou o conjunto de perspectivas (Alcance). Nenhum deles significa mais entregas, mais funcionalidades ou missões paralelas. Se uma sugestão deixa o trabalho maior sem deixá-lo melhor, descarte.
+2. **Faça o que o especialista faz, não como ele fala.** Quando trouxer uma área, use os métodos e os instrumentos dela. Trocar o vocabulário sem trocar os métodos é teatro: a conversa fica mais estranha e o resultado continua o mesmo.
+3. **Um juiz externo decide se funcionou.** Nunca avalie o próprio trabalho. Encontre algo que não seja você nem o usuário para mostrar que o resultado está certo: um teste, um benchmark, uma reprodução, dados separados para validação, uma medição. O melhor de tudo é uma ferramenta que você possa rodar para ter feedback na hora.
+4. **Trate a meta difícil como razoável.** Se um objetivo parece impossível, assuma que tem solução e siga em frente. Metas específicas e difíceis superam o "faça o seu melhor" (a revisão de Locke e Latham sobre 35 anos de pesquisa em definição de metas, citada por Felix). Reporte com honestidade diante do juiz: uma meta difícil não alcançada, com números reais, é um bom resultado. Uma meta forjada, não.
+5. **Consiga o acesso, não finja.** Tudo isso exige um computador onde você possa instalar software e acesso aos dados reais, via conectores MCP (plug-ins que ligam um agente a outros apps) ou outros meios. Se faltar algum dos dois, diga exatamente o que falta e o que isso destravaria. Nunca invente uma fonte, ferramenta ou resultado para tapar o buraco.
 
-## Input
+## Entrada
 
-The task is whatever follows `/be-ambitious`. If nothing follows, use the user's most recent request. If there's none, ask for the task in one line and stop.
+A tarefa é o que vier depois de `/seja-ambicioso`. Se não vier nada, use o pedido mais recente do usuário. Se não houver nenhum, peça a tarefa em uma linha e pare.
 
-Then decide what you were handed:
+Depois, decida o que você recebeu:
 
-- **A task to do** (fix this, build this, analyse this): plan it at the ambitious level, then do it.
-- **A prompt to improve** (a rewrite request, or a task meant for another agent or tool): stop after the rewritten prompt.
+- **Uma tarefa para fazer** (conserta isso, constrói isso, analisa isso): planeje no nível ambicioso e depois execute.
+- **Um prompt para melhorar** (um pedido de reescrita, ou uma tarefa destinada a outro agente ou ferramenta): pare depois do prompt reescrito.
 
-If you can't tell which, stop after the rewritten prompt.
+Se não der para saber qual dos dois, pare depois do prompt reescrito.
 
-## Pick the types that fit
+## Escolha os tipos que se encaixam
 
-Felix names four types of ambition. **Speed** (the same work in less time) is how most people already use AI and needs no creativity, so he skips it, and so does this skill. Use the other three only where they fit. Most tasks need one or two.
+Felix nomeia quatro tipos de ambição. **Velocidade** (o mesmo trabalho em menos tempo) é como a maioria das pessoas já usa IA e não exige criatividade, então ele pula esse tipo, e esta skill também. Use os outros três só onde fizerem sentido. A maioria das tarefas precisa de um ou dois.
 
-| Type | Fits when | Skip when |
+| Tipo | Serve quando | Pule quando |
 |---|---|---|
-| Altitude | The task serves an outcome. A good tell: people will hold meetings about it | Creative work with no outcome beyond itself |
-| Depth | The task should be done really well | Throwaway work |
-| Range | The result has to land with people, or the obvious field has run out of ideas | A narrow fix with one right answer |
+| Altitude | A tarefa serve a um resultado. Um bom sinal: as pessoas vão fazer reuniões sobre isso | Trabalho criativo sem resultado além de si mesmo |
+| Profundidade | A tarefa precisa ser muito bem feita | Trabalho descartável |
+| Alcance | O resultado precisa convencer pessoas, ou a área óbvia ficou sem ideias | Uma correção pontual com uma única resposta certa |
 
-### Altitude: aim at the outcome
+### Altitude: mire no resultado
 
-Ask what the user wants to happen next. What's the goal beyond the goal? Felix used to ask Claude to fix single crashes. Then he asked it to keep the apps crash-free.
+Pergunte o que o usuário quer que aconteça depois. Qual é o objetivo por trás do objetivo? Felix costumava pedir ao Claude para corrigir crashes isolados. Depois passou a pedir para manter os apps livres de crashes.
 
-Build a ladder of three rungs, each more ambitious than the last. Felix's example is a quarterly business review (QBR) deck:
+Monte uma escada de três degraus, cada um mais ambicioso que o anterior. O exemplo de Felix é uma apresentação de revisão trimestral de negócios (QBR):
 
-1. **Understand, don't fill in.** Skip updating the numbers in the template. Take in all the data you can get and work out "what changed this quarter, why, and what we should do about it."
-2. **Get to the decisions.** "Work out which three decisions are most urgent in the face of everything you've learned, and start working on potential directions with for/against arguments."
-3. **Replace the ritual.** "The review exists so leadership catches problems early and moves money and people to the right places. Design a better way to do that than a quarterly deck, show from our own history that it would have caught things sooner, and run it beside the current one for a quarter."
+1. **Entenda, não só preencha.** Não fique só atualizando os números do template. Absorva todos os dados que conseguir e descubra "o que mudou neste trimestre, por quê, e o que deveríamos fazer a respeito".
+2. **Chegue às decisões.** "Descubra quais são as três decisões mais urgentes diante de tudo o que você aprendeu e comece a trabalhar em possíveis caminhos, com argumentos a favor e contra."
+3. **Substitua o ritual.** "A revisão existe para que a liderança detecte problemas cedo e direcione dinheiro e pessoas para os lugares certos. Desenhe um jeito melhor de fazer isso do que uma apresentação trimestral, mostre com o nosso próprio histórico que ele teria detectado as coisas antes, e rode-o em paralelo ao atual por um trimestre."
 
-The top rung is where durable workflows live, ones that take the human out of the loop. They often need setup first. Before Claude could keep Felix's apps crash-free, it needed to fetch crash reports, map each app version to its git commit, and use Windows, macOS and Linux machines to reproduce and verify fixes. Name that setup as part of the plan.
+O degrau mais alto é onde vivem os fluxos de trabalho duradouros, aqueles que tiram o humano do circuito. Eles costumam exigir preparação antes. Para o Claude conseguir manter os apps de Felix livres de crashes, ele precisou buscar os relatórios de crash, mapear cada versão do app para o seu commit no git e usar máquinas Windows, macOS e Linux para reproduzir e verificar as correções. Inclua essa preparação como parte do plano.
 
-Know the ceiling. "Go make money" is still too high for most businesses. If a rung has no outside judge, step down one rung.
+Conheça o teto. "Vá ganhar dinheiro" ainda é alto demais para a maioria das empresas. Se um degrau não tem juiz externo, desça um degrau.
 
-### Depth: work like the field's best
+### Profundidade: trabalhe como os melhores da área
 
-Go one level below the task, to the underlying data, tools and problems. Keep pushing until even the best people in the field could learn something from the work.
+Desça um nível abaixo da tarefa, até os dados, as ferramentas e os problemas que estão por baixo dela. Continue avançando até que mesmo os melhores profissionais da área possam aprender algo com o trabalho.
 
-- **Use the expert's instruments.** Not just their words. Where you'd reach for a markdown table, a top data scientist reaches for a database and a statistical model. The user doesn't need to know what the experts use. You usually do.
-- **Set an unreasonable goal, and treat it as reasonable.** The page loads in 10 seconds and the user asked for 5? Aim for 200 milliseconds.
-- **Challenge what everyone believes.** Get the raw data and test the belief adversarially: "We believe churn is an onboarding problem. Try to reproduce that from the raw data."
-- **Produce new knowledge.** Once you're deep in the data, look for blind spots: "Build a simulation of our customers that reproduces the last year from our logs. Then find the earliest signal of churn we don't know about yet, and show it predicts on data it has not seen."
-- **Bring in an outside judge** (rule 3).
+- **Use os instrumentos do especialista.** Não só as palavras dele. Onde você usaria uma tabela em markdown, um cientista de dados de ponta usa um banco de dados e um modelo estatístico. O usuário não precisa saber o que os especialistas usam. Você normalmente sabe.
+- **Defina uma meta absurda e trate-a como razoável.** A página carrega em 10 segundos e o usuário pediu 5? Mire em 200 milissegundos.
+- **Questione o que todo mundo acredita.** Pegue os dados brutos e teste a crença de forma adversarial: "Acreditamos que o churn é um problema de onboarding. Tente reproduzir isso a partir dos dados brutos."
+- **Produza conhecimento novo.** Quando estiver fundo nos dados, procure pontos cegos: "Construa uma simulação dos nossos clientes que reproduza o último ano a partir dos nossos logs. Depois encontre o sinal mais precoce de churn que ainda não conhecemos e mostre que ele prevê em dados que nunca viu."
+- **Traga um juiz externo** (regra 3).
 
-Run every Depth pass through Felix's prompt:
+Passe toda análise de Profundidade pelo prompt de Felix:
 
-> I want a deeper version of this task, not a bigger one. Before rewriting it: (1) say what a top professional in this field would do here that I'm not asking for; (2) name the rawest material they would start from instead of what has already been digested for me; (3) name the specific methods and tools they would use; (4) say what, other than you or me, would show the result is right. Then rewrite my prompt to ask for exactly that.
+> Quero uma versão mais profunda desta tarefa, não uma maior. Antes de reescrevê-la: (1) diga o que um profissional de ponta desta área faria aqui que eu não estou pedindo; (2) aponte o material mais bruto de onde ele partiria, em vez do que já chegou digerido para mim; (3) cite os métodos e as ferramentas específicas que ele usaria; (4) diga o que, além de você ou de mim, mostraria que o resultado está certo. Depois reescreva o meu prompt pedindo exatamente isso.
 
-### Range: bring in other fields
+### Alcance: traga outras áreas
 
-Look at the work through more fields than used to be affordable. Every heist movie spends its first 30 minutes assembling the crew. Felix sees the most magic here, and it takes the most creativity.
+Olhe para o trabalho através de mais áreas do que antes era viável. Todo filme de assalto gasta os primeiros 30 minutos montando a equipe. É aqui que Felix vê mais mágica, e é o que exige mais criatividade.
 
-- **Replace the nouns with verbs.** A trick from *The Art of Innovation* by Tom Kelley and Jonathan Littman. A quarterly review isn't "a deck". It's "getting busy people to believe a story about cause and effect, and to decide under uncertainty, in 30 minutes". The verbs show which fields can help.
-- **Assemble the crew.** Raise the stakes: the deck has to be amazing or aliens blow up Earth, so who does humanity send? For quality: an analyst, a journalist and an editor. If it's presented: a motion designer and an audio designer. As a red team: a short seller and a forensic accountant.
-- **Borrow their tools.** A field brings its software, not only its ideas. Felix's colleague Alex Albert renders interior designs in Blender, a 3D tool.
-- **Do, don't play** (rule 2). Don't write like a short seller. Do what a short seller does to research a position. If you can run subagents, give each field its own subagent with that field's method and tools.
+- **Troque os substantivos por verbos.** Um truque de *A Arte da Inovação*, de Tom Kelley e Jonathan Littman. Uma revisão trimestral não é "uma apresentação". É "fazer pessoas ocupadas acreditarem numa história de causa e efeito, e decidirem sob incerteza, em 30 minutos". Os verbos mostram quais áreas podem ajudar.
+- **Monte a equipe.** Aumente o que está em jogo: a apresentação precisa ser incrível ou os alienígenas explodem a Terra, então quem a humanidade envia? Para qualidade: um analista, um jornalista e um editor. Se for apresentada ao vivo: um motion designer e um designer de áudio. Como red team: um vendedor a descoberto (short seller) e um contador forense.
+- **Pegue as ferramentas emprestadas.** Uma área traz o seu software, não só as suas ideias. Alex Albert, colega de Felix, renderiza projetos de design de interiores no Blender, uma ferramenta 3D.
+- **Faça, não interprete** (regra 2). Não escreva como um short seller. Faça o que um short seller faz para pesquisar uma posição. Se você puder rodar subagentes, dê a cada área o seu próprio subagente, com o método e as ferramentas daquela área.
 
-## Output
+## Saída
 
-Size the output to the task: a one-line prompt gets a few lines of plan, because the rewritten prompt is the product. In this order:
+Dimensione a saída de acordo com a tarefa: um prompt de uma linha recebe poucas linhas de plano, porque o prompt reescrito é o produto. Nesta ordem:
 
-1. **The goal beyond the goal**, in one line.
-2. **The types that fit**, one line each on why, plus the ones you skipped.
-3. **The plan** for each type you picked. Altitude: the three-rung ladder. Depth: the four answers from Felix's prompt and the hard target. Range: the verbs, then the crew as field, the job they'd actually do, and the method or tool they'd use for it.
-4. **What it needs**: the data, tools and access, marked as already there or missing.
-5. **The rewritten prompt** in one fenced block the user can copy, written the way they'd type it, ending with the outside judge and what counts as a pass.
-6. **Next.** Pick the highest rung you can finish and check with the access you have now. For a prompt to improve, name that rung and stop. For a task to do, name it in one line and start. If even the first rung needs access you don't have, ask for it and stop. Ask first, too, when the rung replaces what the user asked for instead of raising it, spends money, or can't be undone. Ambition raises the standard, not the permissions.
+1. **O objetivo por trás do objetivo**, em uma linha.
+2. **Os tipos que se encaixam**, uma linha para cada explicando o porquê, mais os que você pulou.
+3. **O plano** para cada tipo escolhido. Altitude: a escada de três degraus. Profundidade: as quatro respostas do prompt de Felix e a meta difícil. Alcance: os verbos, depois a equipe com a área, o trabalho que ela faria de verdade e o método ou a ferramenta que usaria para isso.
+4. **Do que precisa**: os dados, as ferramentas e os acessos, marcados como já disponíveis ou faltando.
+5. **O prompt reescrito** em um único bloco cercado que o usuário possa copiar, escrito do jeito que ele digitaria, terminando com o juiz externo e o que conta como aprovado.
+6. **Próximo passo.** Escolha o degrau mais alto que você consegue concluir e verificar com o acesso que tem agora. Para um prompt a melhorar, nomeie esse degrau e pare. Para uma tarefa a fazer, nomeie-o em uma linha e comece. Se até o primeiro degrau exigir um acesso que você não tem, peça e pare. Pergunte antes, também, quando o degrau substituir o que o usuário pediu em vez de elevá-lo, gastar dinheiro ou não puder ser desfeito. Ambição eleva o padrão, não as permissões.
 
-## A short example
+## Um exemplo curto
 
-`/be-ambitious fix the crash in the login screen`
+`/seja-ambicioso corrige o crash na tela de login`
 
-- **Goal beyond the goal:** people can always log in.
-- **Types:** Altitude and Depth. Range skipped, since a crash fix has one right answer.
-- **Altitude ladder:** (1) fix this crash with a test that fails before and passes after; (2) find every crash of this kind in the crash reports and fix the cause, not the symptom; (3) keep login crash-free: fetch crash reports, map versions to commits, reproduce on every platform, fix and verify without waiting to be asked.
-- **Depth:** start from the raw crash dumps and logs, not the bug report. Reproduce before you fix. Target zero login crashes in the next release, not fewer.
-- **Outside judge:** the failing test turns green, and the crash rate in the reporting tool drops to zero for that build.
+- **Objetivo por trás do objetivo:** as pessoas sempre conseguem fazer login.
+- **Tipos:** Altitude e Profundidade. Alcance pulado, já que a correção de um crash tem uma única resposta certa.
+- **Escada de Altitude:** (1) corrigir este crash com um teste que falha antes e passa depois; (2) encontrar todos os crashes desse tipo nos relatórios e corrigir a causa, não o sintoma; (3) manter o login livre de crashes: buscar os relatórios de crash, mapear versões para commits, reproduzir em todas as plataformas, corrigir e verificar sem esperar alguém pedir.
+- **Profundidade:** partir dos dumps de crash e dos logs brutos, não do relato do bug. Reproduzir antes de corrigir. Meta: zero crashes de login na próxima versão, não "menos crashes".
+- **Juiz externo:** o teste que falhava fica verde, e a taxa de crashes na ferramenta de monitoramento cai para zero naquela build.
 
-## Why this works
+## Por que isso funciona
 
-Felix ends on self-efficacy: people who believe in their own abilities accomplish more, and that belief can be hacked. George Dantzig solved two unsolved statistics problems in 1939 because he thought they were homework. Roger Bannister broke the four-minute mile in 1954, and someone else broke it 46 days later. *The Inner Game of Tennis* argues you play your best when you stop trying so hard. The same holds for the user and the model: say the hard thing is possible, and give permission to fail against an honest judge.
+Felix fecha falando de autoeficácia: pessoas que acreditam nas próprias capacidades realizam mais, e essa crença pode ser hackeada. George Dantzig resolveu dois problemas de estatística em aberto em 1939 porque achou que eram lição de casa. Roger Bannister quebrou a barreira da milha em quatro minutos em 1954, e outra pessoa quebrou de novo 46 dias depois. *O Jogo Interior do Tênis* defende que você joga melhor quando para de se esforçar tanto. O mesmo vale para o usuário e para o modelo: diga que a coisa difícil é possível e dê permissão para falhar diante de um juiz honesto.

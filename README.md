@@ -1,113 +1,120 @@
 <p align="center">
-  <img src="assets/banner.png" alt="be-ambitious" width="100%">
+  <img src="assets/banner.png" alt="seja-ambicioso" width="100%">
 </p>
 
-# be-ambitious
+# seja-ambicioso
 
-A free Claude skill that makes your agent more ambitious when you invoke it.
+Uma skill gratuita para o Claude que deixa o seu agente mais ambicioso quando você a chama.
 
-It turns Felix Rieseberg's article [How to be more ambitious: a tutorial for humans with models](https://felixrieseberg.com/how-to-be-more-ambitious-a-tutorial-for-humans-with-models/) into steps an agent follows. Felix works on Claude at Anthropic. All the ideas are his.
+Ela transforma o artigo de Felix Rieseberg [How to be more ambitious: a tutorial for humans with models](https://felixrieseberg.com/how-to-be-more-ambitious-a-tutorial-for-humans-with-models/) ("Como ser mais ambicioso: um tutorial para humanos com modelos") em passos que um agente segue. Felix trabalha no Claude, na Anthropic. Todas as ideias são dele.
 
-## What it does
+Esta é a versão 100% em português da skill [be-ambitious](https://github.com/robonuggets/be-ambitious), criada por Jay E | RoboNuggets.
 
-Most of us use a model at the size of the task we typed. Felix's point: the model can do far more if you aim it higher, deeper or wider. He names four types of ambition. The skill uses three of them:
+## O que ela faz
 
-| Type | The question it asks | Example |
+A maioria de nós usa um modelo no tamanho da tarefa que digitou. O ponto de Felix: o modelo consegue fazer muito mais se você mirar mais alto, mais fundo ou mais amplo. Ele nomeia quatro tipos de ambição. A skill usa três deles:
+
+| Tipo | A pergunta que ele faz | Exemplo |
 |---|---|---|
-| **Altitude** | What's the goal beyond the goal? | Don't fix one crash. Keep the app crash-free. |
-| **Depth** | What would the best expert in the field do, from the raw data, and what outside check proves it's right? | Don't make a markdown table. Load the data into a database and fit a real statistical model. |
-| **Range** | Which other fields would help, and what do their experts actually do? | Bring in a journalist, an editor and a short seller, and have each do their real job. |
+| **Altitude** | Qual é o objetivo por trás do objetivo? | Não corrija um crash. Mantenha o app livre de crashes. |
+| **Profundidade** | O que o melhor especialista da área faria, a partir dos dados brutos, e que verificação externa prova que está certo? | Não monte uma tabela em markdown. Carregue os dados num banco de dados e ajuste um modelo estatístico de verdade. |
+| **Alcance** | Quais outras áreas ajudariam, e o que os especialistas delas fazem de fato? | Traga um jornalista, um editor e um short seller, e faça cada um executar o seu trabalho real. |
 
-The fourth type, **Speed** (the same work in less time), is how most people already use AI, so Felix skips it and so does the skill.
+O quarto tipo, **Velocidade** (o mesmo trabalho em menos tempo), é como a maioria das pessoas já usa IA, então Felix pula esse tipo, e a skill também.
 
-When you invoke it, the skill:
+Quando você a chama, a skill:
 
-1. Finds the goal beyond the goal.
-2. Picks the types that fit your task (usually one or two, not all three).
-3. Writes the ambitious plan: a 3-rung ladder for Altitude, Felix's four expert questions for Depth, and the crew for Range.
-4. Lists the data, tools and access the plan needs, and what's missing.
-5. Rewrites your prompt at that level, ending with an outside check and what counts as a pass.
-6. Does the work, if you handed it a task. Stops after the rewrite, if you handed it a prompt to improve.
+1. Encontra o objetivo por trás do objetivo.
+2. Escolhe os tipos que se encaixam na sua tarefa (normalmente um ou dois, não os três).
+3. Escreve o plano ambicioso: uma escada de 3 degraus para Altitude, as quatro perguntas de especialista de Felix para Profundidade e a equipe para Alcance.
+4. Lista os dados, as ferramentas e os acessos que o plano exige, e o que está faltando.
+5. Reescreve o seu prompt nesse nível, terminando com uma verificação externa e o que conta como aprovado.
+6. Executa o trabalho, se você passou uma tarefa. Para depois da reescrita, se você passou um prompt para melhorar.
 
-It holds a few hard lines from the article: better, not bigger. Do what the expert does, not role play. Never grade your own work. Treat the hard target as reasonable, and report honestly against the check.
+Ela segue algumas regras firmes do artigo: melhor, não maior. Faça o que o especialista faz, não teatro. Nunca avalie o próprio trabalho. Trate a meta difícil como razoável e reporte com honestidade diante da verificação.
 
-## Install
+## Instalação
 
-**Claude Code.** Put the skill in a folder named `be-ambitious` inside your skills folder.
+**Claude Code.** Coloque a skill numa pasta chamada `seja-ambicioso` dentro da sua pasta de skills.
 
-For all your projects:
-
-```bash
-git clone https://github.com/robonuggets/be-ambitious ~/.claude/skills/be-ambitious
-```
-
-For one project only, run this from the project folder:
+Para todos os seus projetos:
 
 ```bash
-git clone https://github.com/robonuggets/be-ambitious .claude/skills/be-ambitious
+git clone https://github.com/michelhilg/seja-ambicioso ~/.claude/skills/seja-ambicioso
 ```
 
-The skill is one file, so copying `SKILL.md` into `~/.claude/skills/be-ambitious/` works too. On Windows, `~/.claude` is the `.claude` folder inside your user folder.
+Só para um projeto, rode isto a partir da pasta do projeto:
 
-**claude.ai.** Zip `SKILL.md` and `LICENSE` in a folder named `be-ambitious`, then upload it under Skills in your claude.ai settings.
+```bash
+git clone https://github.com/michelhilg/seja-ambicioso .claude/skills/seja-ambicioso
+```
 
-## Use it
+A skill é um único arquivo, então copiar o `SKILL.md` para `~/.claude/skills/seja-ambicioso/` também funciona. No Windows, `~/.claude` é a pasta `.claude` dentro da sua pasta de usuário.
 
-Type `/be-ambitious` and your task:
+**claude.ai.** Compacte o `SKILL.md` e o `LICENSE` num .zip com uma pasta chamada `seja-ambicioso` e envie em Skills, nas configurações do claude.ai.
+
+## Como usar
+
+Digite `/seja-ambicioso` e a sua tarefa:
 
 ```text
-/be-ambitious make our quarterly business review deck from the sales CSVs in /data
+/seja-ambicioso monta a apresentação da revisão trimestral a partir dos CSVs de vendas em /data
 ```
 
-- **A task to do** (fix, build, analyse): you get the plan and the rewritten prompt, then the agent starts on the rung it picked. It asks first only if the rung replaces what you asked for, costs money, or can't be undone.
-- **A prompt to improve** ("rewrite this prompt", or a prompt meant for another tool): you get the plan and the rewritten prompt, and it stops.
-- **No task:** `/be-ambitious` on its own uses your last request.
+- **Uma tarefa para fazer** (corrigir, construir, analisar): você recebe o plano e o prompt reescrito, e então o agente começa pelo degrau que escolheu. Ele só pergunta antes se o degrau substituir o que você pediu, custar dinheiro ou não puder ser desfeito.
+- **Um prompt para melhorar** ("reescreve este prompt", ou um prompt destinado a outra ferramenta): você recebe o plano e o prompt reescrito, e ela para.
+- **Sem tarefa:** `/seja-ambicioso` sozinho usa o seu último pedido.
 
-You can also say it in plain words, like "be more ambitious with this" or "what would a top expert do here?"
+Você também pode pedir em linguagem natural, como "seja mais ambicioso com isso" ou "o que um especialista de ponta faria aqui?".
 
-## Example
+## Exemplo
 
-You type:
+Você digita:
 
 ```text
-/be-ambitious our marketing website takes 8 seconds to load, speed it up
+/seja-ambicioso o site de marketing leva 8 segundos para carregar, deixa ele mais rápido
 ```
 
-You get (from a real test run, trimmed):
+Você recebe (de um teste real, resumido):
 
-- **Goal beyond the goal:** visitors never leave because the site is slow.
-- **Types:** Altitude and Depth. Range skipped, since a speed fix has mostly one right answer.
-- **Altitude ladder:**
-  1. Get the page under a set load time, with before and after measurements.
-  2. Find every slow page and fix the causes.
-  3. Keep the site fast: a performance budget checked on every deploy, failing the build when it slips.
-- **Depth:** start from a real trace, not guesses. Use Lighthouse, WebPageTest, the network waterfall and a bundle analyzer. Hard target: about 200 ms to first useful content, not 5 seconds.
-- **Outside judge:** repeated measured runs and real-user numbers.
-- **Rewritten prompt:**
+- **Objetivo por trás do objetivo:** nenhum visitante vai embora porque o site é lento.
+- **Tipos:** Altitude e Profundidade. Alcance pulado, já que acelerar um site tem basicamente uma resposta certa.
+- **Escada de Altitude:**
+  1. Colocar a página abaixo de um tempo de carregamento definido, com medições de antes e depois.
+  2. Encontrar todas as páginas lentas e corrigir as causas.
+  3. Manter o site rápido: um orçamento de performance verificado a cada deploy, que quebra o build quando é ultrapassado.
+- **Profundidade:** partir de um trace real, não de palpites. Usar Lighthouse, WebPageTest, a cascata de rede e um analisador de bundle. Meta difícil: cerca de 200 ms até o primeiro conteúdo útil, não 5 segundos.
+- **Juiz externo:** execuções repetidas e medidas, e números de usuários reais.
+- **Prompt reescrito:**
 
 ```text
-Our marketing website takes 8 seconds to load. Start from a real trace (Lighthouse,
-WebPageTest, the network waterfall), not guesses, and list the biggest causes by time
-cost. Fix them in order, measuring after each fix. Aim for about 200 ms to first useful
-content. Then add a performance budget to our deploys so it can't get slow again.
-Pass = repeated test runs show the target met, and the deploy check fails when the
-budget is broken. Report real numbers, including any missed target.
+Nosso site de marketing leva 8 segundos para carregar. Comece por um trace real
+(Lighthouse, WebPageTest, a cascata de rede), não por palpites, e liste as maiores
+causas por custo de tempo. Corrija na ordem, medindo depois de cada correção. Mire em
+cerca de 200 ms até o primeiro conteúdo útil. Depois adicione um orçamento de
+performance aos nossos deploys para que o site não fique lento de novo.
+Aprovado = execuções de teste repetidas mostram a meta atingida, e a verificação do
+deploy falha quando o orçamento é estourado. Reporte números reais, incluindo
+qualquer meta não atingida.
 ```
 
-Then it starts: a baseline Lighthouse run on the live site, the slowest requests ranked, and the top cause fixed and measured again.
+Então ela começa: uma rodada base do Lighthouse no site no ar, as requisições mais lentas ranqueadas e a principal causa corrigida e medida de novo.
 
-## What it needs
+## Do que ela precisa
 
-Felix's note, and it matters: all of this needs a model with **a computer it can install software on** and **access to the real data**, through MCP connectors (plug-ins that link the agent to your apps) or other means. Without them, the skill tells you exactly what's missing and what it would unlock. It won't invent data to fill the gap.
+A observação de Felix, e ela importa: tudo isso exige um modelo com **um computador onde ele possa instalar software** e **acesso aos dados reais**, via conectores MCP (plug-ins que ligam o agente aos seus apps) ou outros meios. Sem isso, a skill diz exatamente o que falta e o que isso destravaria. Ela não inventa dados para tapar o buraco.
 
-## Credits
+## Créditos
 
-- **Felix Rieseberg** for the article this skill is built on: [How to be more ambitious: a tutorial for humans with models](https://felixrieseberg.com/how-to-be-more-ambitious-a-tutorial-for-humans-with-models/) (13 Oct 2026). The types, the examples, the Depth prompt and the warnings are his.
-- **DannyMac180** for the earlier, prompt-only version: [DannyMac180/skills](https://github.com/DannyMac180/skills/tree/main/be-ambitious). It wraps Felix's "deeper, not bigger" prompt. This version adds Altitude and Range.
-- **Tom Kelley and Jonathan Littman** for the nouns-to-verbs trick in *The Art of Innovation*, which Felix uses for Range.
+- **Jay E | [RoboNuggets](https://www.skool.com/robonuggets)** pela skill original em inglês, [be-ambitious](https://github.com/robonuggets/be-ambitious), da qual este repositório é um fork traduzido. A estrutura, os passos e os exemplos desta versão são dele.
+- **Felix Rieseberg** pelo artigo em que a skill se baseia: [How to be more ambitious: a tutorial for humans with models](https://felixrieseberg.com/how-to-be-more-ambitious-a-tutorial-for-humans-with-models/) (13 out. 2026). Os tipos, os exemplos, o prompt de Profundidade e os alertas são dele.
+- **DannyMac180** pela versão anterior, só de prompt: [DannyMac180/skills](https://github.com/DannyMac180/skills/tree/main/be-ambitious). Ela encapsula o prompt "mais fundo, não maior" de Felix. A versão do RoboNuggets acrescentou Altitude e Alcance.
+- **Tom Kelley e Jonathan Littman** pelo truque de trocar substantivos por verbos, de *A Arte da Inovação*, que Felix usa em Alcance.
 
-## License
+Tradução e adaptação para o português por **Michel Hilg** ([@michelhilg](https://www.instagram.com/michelhilg/)).
 
-MIT. See [LICENSE](LICENSE).
+## Licença
 
-Made by [RoboNuggets](https://www.skool.com/robonuggets)
+MIT, a mesma do projeto original. Veja o arquivo [LICENSE](LICENSE), que mantém o aviso de copyright original do RoboNuggets ao lado do da tradução. O texto da licença fica em inglês de propósito, porque é o texto oficial da licença MIT.
+
+Feito por [@michelhilg](https://www.instagram.com/michelhilg/), a partir do trabalho de [RoboNuggets](https://www.skool.com/robonuggets).
